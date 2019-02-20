@@ -135,7 +135,8 @@ function validateUserToken (req, res, next) {
   var rspObj = req.rspObj || {}
 
   if (!token) {
-    LOG.error(utilsService.getLoggerData(rspObj, 'ERROR', filename, 'validateToken', 'API failed due to missing token'))
+    LOG.error(utilsService.getLoggerData(rspObj, 'ERROR', filename,
+      'validateUserToken', 'API failed due to missing token'))
     rspObj.errCode = reqMsg.TOKEN.MISSING_CODE
     rspObj.errMsg = reqMsg.TOKEN.MISSING_MESSAGE
     rspObj.responseCode = responseCode.UNAUTHORIZED_ACCESS
@@ -144,7 +145,8 @@ function validateUserToken (req, res, next) {
 
   apiInterceptor.validateToken(token, function (err, tokenData) {
     if (err) {
-      LOG.error(utilsService.getLoggerData(rspObj, 'ERROR', filename, 'validateToken', 'Invalid token', err))
+      LOG.error(utilsService.getLoggerData(rspObj, 'ERROR', filename,
+        'validateUserToken', 'Invalid token', err))
       rspObj.errCode = reqMsg.TOKEN.INVALID_CODE
       rspObj.errMsg = reqMsg.TOKEN.INVALID_MESSAGE
       rspObj.responseCode = responseCode.UNAUTHORIZED_ACCESS
